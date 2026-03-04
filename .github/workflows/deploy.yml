@@ -1,0 +1,32 @@
+# Deploy homepage to Dreamhost via FTP
+# Triggered on push to main branch
+# Only uploads files — never deletes existing server content (safe for /Proj_* directories)
+
+name: Deploy to Dreamhost
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    name: Upload to Dreamhost
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Deploy via LFTP
+        uses: pressidium/lftp-mirror-action@v1
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          user: ${{ secrets.FTP_USER }}
+          pass: ${{ secrets.FTP_PASS }}
+          localDir: './site/'
+          remoteDir: '/'
+          options: '--only-newer --no-remove-other --parallel=4 --verbose'
+          # --only-newer:       Only upload files that have changed
+          # --no-remove-other:  CRITICAL — don't delete /Proj_*, /downloads, etc.
+          # --parallel=4:       Upload 4 files at a time for speed
