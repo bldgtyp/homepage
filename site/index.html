@@ -170,6 +170,8 @@
         /* .service-card base from components.css; page overrides: */
         .service-card {
             max-width: none; /* override component 340px cap for grid layout */
+            display: flex;
+            flex-direction: column;
         }
         .service-card:hover {
             transform: translateY(-2px);
@@ -189,6 +191,31 @@
         }
 
         /* .service-card__title, __subtitle, __body from components.css */
+
+        .service-card__img-strip {
+            height: 80px;
+            margin: auto -32px -40px -32px; /* auto top margin pushes strip to card bottom */
+            overflow: hidden;
+            /* border-top: 1px solid var(--border-subtle); */
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+        }
+
+        .service-card__img-strip img {
+            width: 120%;
+            height: 120%;
+            object-fit: cover;
+            object-position: center 50%;
+        }
+
+        [data-theme="light"] .service-card__img-strip img {
+            opacity: 0.4;
+            filter: grayscale(100%);
+        }
+
+        [data-theme="dark"] .service-card__img-strip img {
+            opacity: 0.4;
+            filter: grayscale(100%) invert(1);
+        }
 
         /* ========== WHO WE WORK WITH ========== */
         .who-section {
@@ -815,7 +842,7 @@
     </section>
 
     <!-- Services Section -->
-    <section class="services graph-paper" id="services">
+    <section class="services graph-paper graph-paper--fine" id="services">
         <div class="services-inner">
             <span class="section-label">WHAT WE DO</span>
 
@@ -849,6 +876,9 @@
                     <h3 class="service-card__title">ENERGY MODELING</h3>
                     <h4 class="service-card__subtitle">Know before you build</h4>
                     <p class="service-card__body">We model your building's energy performance so you can make design decisions with real data — not assumptions. From envelope to mechanicals, every system is accounted for.</p>
+                    <div class="service-card__img-strip">
+                        <img src="assets/energy-model.png" alt="" aria-hidden="true">
+                    </div>
                 </div>
 
                 <!-- Service Card 2: Thermal Bridges -->
@@ -874,6 +904,9 @@
                     <h3 class="service-card__title">THERMAL BRIDGES</h3>
                     <h4 class="service-card__subtitle">Find the hidden losses</h4>
                     <p class="service-card__body">3D finite-element thermal bridge modeling identifies where your envelope is bleeding performance — before construction begins. Every junction, every connection, quantified.</p>
+                    <div class="service-card__img-strip">
+                        <img src="assets/thermal-bridge.png" alt="" aria-hidden="true">
+                    </div>
                 </div>
 
                 <!-- Service Card 3: Certification -->
@@ -893,7 +926,10 @@
                     </div>
                     <h3 class="service-card__title">CERTIFICATION</h3>
                     <h4 class="service-card__subtitle">Cross the finish line</h4>
-                    <p class="service-card__body">PHIUS and PHI certification support from schematic design through final verification. We handle the modeling, the documentation, and the review process.</p>
+                    <p class="service-card__body"><a href="https://www.phius.org/" target="_blank" rel="noopener noreferrer">PHIUS</a> and <a href="https://passivehouse.com/" target="_blank" rel="noopener noreferrer">PHI</a> certification support from schematic design through final verification. We handle the modeling, the documentation, and the review process.</p>
+                    <div class="service-card__img-strip">
+                        <img src="assets/certification.png" alt="" aria-hidden="true">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1059,10 +1095,10 @@
         </div>
     </section>
 
-    <!-- Deliverable Section -->
+    <!-- Design-Phase Assessment Section -->
     <section class="deliverable" id="deliverable">
         <div class="deliverable-inner">
-            <span class="section-label">YOUR DELIVERABLE</span>
+            <span class="section-label">Design-Phase Assessment</span>
 
             <div class="deliverable-grid">
                 <!-- Report Mockup -->
@@ -1102,9 +1138,9 @@
                     </div>
                 </div>
 
-                <!-- Deliverable Content -->
+                <!-- Design-Phase Assessment Content -->
                 <div class="deliverable-content">
-                    <h3>A complete picture of your building's performance</h3>
+                    <h3>Understand your building's performance, before you build.</h3>
                     <p class="deliverable-intro">Every project receives a detailed design-phase report covering:</p>
 
                     <ul class="deliverable-list">
@@ -1116,7 +1152,7 @@
                         <li>Certification pathway and compliance status</li>
                     </ul>
 
-                    <p class="deliverable-closing">CLEAR ENOUGH FOR YOUR CLIENT.<br>DETAILED ENOUGH FOR YOUR ENGINEER.</p>
+                    <p class="deliverable-closing">CLEAR ENOUGH FOR ANYONE.<br>DETAILED ENOUGH FOR AN ENGINEER.</p>
                 </div>
             </div>
         </div>
@@ -1163,8 +1199,8 @@
     <!-- Final CTA Section -->
     <section class="final-cta" id="contact">
         <div class="final-cta-inner">
-            <h2>Ready to model your next project?</h2>
-            <p class="final-cta-subtitle">We work with architects, developers, and builders building to the highest standard. Reach out to start the conversation.</p>
+            <h2>Ready to get started?</h2>
+            <p class="final-cta-subtitle">We work with architects, developers, and builders building to the highest standard. Reach out to get started and learn how we can help with your next high-performance building.</p>
             <button class="btn-primary" onclick="handleCTA()">Start a Project →</button>
             <p class="final-cta-email">or email us at <a href="mailto:info@bldgtyp.com">info@bldgtyp.com</a></p>
         </div>
