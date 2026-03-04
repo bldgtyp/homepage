@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLDGTYP · Passive House Consulting · Brooklyn</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://bldgtyp.github.io/branding/tokens/tokens.css">
     <style>
         * {
             margin: 0;
@@ -12,51 +13,7 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --accent: #7a9424;
-            --accent-light: #e8ecd8;
-            --accent-dark: #4a5916;
-            --highlight: #DC2626;
-            --highlight-light: #fde8e8;
-            --highlight-dark: #991b1b;
-            --font-mono: 'JetBrains Mono', monospace;
-        }
-
-        [data-theme="dark"] {
-            --bg-page: #111111;
-            --bg-card: #1a1a1a;
-            --bg-section-alt: #161616;
-            --bg-stats: #0a0a0a;
-            --text-primary: #ffffff;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
-            --border-subtle: #2a2a2a;
-            --border-card: #2a2a2a;
-            --svg-line-heavy: rgba(255,255,255,0.5);
-            --svg-line-medium: rgba(255,255,255,0.3);
-            --svg-line-light: rgba(255,255,255,0.15);
-            --svg-line-faint: rgba(255,255,255,0.08);
-            --svg-fill-dot: rgba(255,255,255,0.12);
-            --svg-text: rgba(255,255,255,0.4);
-        }
-
-        [data-theme="light"] {
-            --bg-page: #ffffff;
-            --bg-card: #ffffff;
-            --bg-section-alt: #F8F9FA;
-            --bg-stats: #111111;
-            --text-primary: #111111;
-            --text-secondary: #6b7280;
-            --text-muted: #9ca3af;
-            --border-subtle: #e5e7eb;
-            --border-card: #e5e7eb;
-            --svg-line-heavy: rgba(0,0,0,0.5);
-            --svg-line-medium: rgba(0,0,0,0.3);
-            --svg-line-light: rgba(0,0,0,0.15);
-            --svg-line-faint: rgba(0,0,0,0.08);
-            --svg-fill-dot: rgba(0,0,0,0.12);
-            --svg-text: rgba(0,0,0,0.4);
-        }
+        /* Design tokens loaded from branding/tokens.css */
 
         html {
             scroll-behavior: smooth;
@@ -65,7 +22,7 @@
         body {
             background-color: var(--bg-page);
             color: var(--text-primary);
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             line-height: 1.7;
             transition: all 0.3s ease;
@@ -94,7 +51,7 @@
         }
 
         .nav-brand {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 500;
             font-size: 14px;
             letter-spacing: 0.3em;
@@ -206,7 +163,7 @@
         }
 
         .hero-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: clamp(3rem, 6vw, 5.5rem);
             letter-spacing: -0.02em;
@@ -216,7 +173,7 @@
         }
 
         .hero-subtitle {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 22px;
             line-height: 1.6;
@@ -334,7 +291,7 @@
         }
 
         .service-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: 16px;
             letter-spacing: 0.1em;
@@ -344,7 +301,7 @@
         }
 
         .service-subtitle {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 500;
             font-size: 20px;
             color: var(--text-primary);
@@ -353,7 +310,7 @@
         }
 
         .service-desc {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 16px;
             line-height: 1.7;
@@ -402,7 +359,7 @@
         }
 
         .who-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: 22px;
             letter-spacing: 0.05em;
@@ -412,7 +369,7 @@
         }
 
         .who-subtitle {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 16px;
             color: var(--accent);
@@ -420,7 +377,7 @@
         }
 
         .who-body {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 17px;
             line-height: 1.8;
@@ -516,7 +473,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 500;
             font-size: 24px;
             color: var(--accent);
@@ -533,7 +490,7 @@
         }
 
         .step-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: 15px;
             letter-spacing: 0.1em;
@@ -543,7 +500,7 @@
         }
 
         .step-desc {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 13px;
             line-height: 1.65;
@@ -598,7 +555,7 @@
         }
 
         .report-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 500;
             font-size: 12px;
             letter-spacing: 0.15em;
@@ -658,7 +615,7 @@
         }
 
         .report-table-value {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 500;
             font-size: 12px;
             color: var(--text-primary);
@@ -700,7 +657,7 @@
         }
 
         .deliverable-content h3 {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: clamp(1.8rem, 3vw, 2.8rem);
             line-height: 1.3;
@@ -709,7 +666,7 @@
         }
 
         .deliverable-intro {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 17px;
             line-height: 1.8;
@@ -723,7 +680,7 @@
         }
 
         .deliverable-list li {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 16px;
             line-height: 1.8;
@@ -796,7 +753,7 @@
         }
 
         .oss-text {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 16px;
             line-height: 1.7;
@@ -847,7 +804,7 @@
         }
 
         .stat-number {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: clamp(2.5rem, 5vw, 4rem);
             line-height: 1;
@@ -881,7 +838,7 @@
         }
 
         .final-cta h2 {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: clamp(2rem, 4vw, 3rem);
             line-height: 1.3;
@@ -890,7 +847,7 @@
         }
 
         .final-cta-subtitle {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 300;
             font-size: 18px;
             line-height: 1.7;
