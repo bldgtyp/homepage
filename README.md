@@ -5,7 +5,7 @@ Source for the BLDGTYP company homepage. Deploys automatically to Dreamhost via 
 ## Repo structure
 
 ```
-bldgtyp-site/
+homepage/
 ├── .github/workflows/deploy.yml   ← GitHub Actions FTP deploy
 ├── site/                           ← Everything in here gets uploaded to Dreamhost
 │   ├── index.html                  ← The homepage
@@ -36,13 +36,14 @@ git push -u origin main
 
 Go to **github.com/bldgtyp/bldgtyp-site → Settings → Secrets and variables → Actions** and add three repository secrets:
 
-| Secret       | Value                                             |
-|-------------|---------------------------------------------------|
-| `FTP_HOST`  | Your Dreamhost FTP hostname (e.g. `ftp.bldgtyp.com` or check Dreamhost panel → Manage Domains) |
-| `FTP_USER`  | Your Dreamhost FTP username for bldgtyp.com       |
-| `FTP_PASS`  | The FTP password                                  |
+| Secret     | Value                                                                                          |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| `FTP_HOST` | Your Dreamhost FTP hostname (e.g. `ftp.bldgtyp.com` or check Dreamhost panel → Manage Domains) |
+| `FTP_USER` | Your Dreamhost FTP username for bldgtyp.com                                                    |
+| `FTP_PASS` | The FTP password                                                                               |
 
 To find your FTP credentials in Dreamhost:
+
 1. Log into panel.dreamhost.com
 2. Go to **Manage Websites** → click your domain
 3. Look under **Login Info** for the username and server
@@ -56,6 +57,7 @@ You can also trigger a deploy manually from the Actions tab using "Run workflow"
 ## How it works
 
 The GitHub Action uses `lftp mirror` with these critical flags:
+
 - `--only-newer` — only uploads files that have actually changed
 - `--no-remove-other` — **never deletes** files on the server that aren't in this repo (protects `/Proj_*`, `/downloads`, etc.)
 
