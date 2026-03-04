@@ -746,6 +746,35 @@
             border-top: 1px solid var(--border-subtle);
         }
 
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logos a {
+            display: block;
+            height: 40px;
+            opacity: 0.45;
+            transition: opacity var(--transition-base);
+        }
+
+        .footer-logos a:hover {
+            opacity: 0.75;
+        }
+
+        .footer-logos img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        [data-theme="dark"] .footer-logos img {
+            filter: brightness(0.9) contrast(0.9);
+        }
+
         footer p {
             font-family: var(--font-mono);
             font-weight: 300;
@@ -826,7 +855,7 @@
             <span class="hero-label">BLDGTYP · PASSIVE HOUSE DESIGN & CONSULTING</span>
             <h1 class="type-hero hero-title">Your Passive House questions.<br>Answered.</h1>
             <p class="hero-subtitle">Passive House design and consulting for architects, developers, and builders. We model the answers so you can build with confidence.</p>
-            <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project →</button>
+            <button class="btn-primary" onclick="handleCTA()">Reach out today: info@bldgtyp.com</button>
         </div>
     </section>
 
@@ -1103,21 +1132,21 @@
     <!-- Stats Section -->
     <section class="stats" id="stats">
         <div class="stats-inner">
-            <span class="section-label">WHY PASSIVE HOUSE</span>
+            <span class="section-label">WHY PASSIVE HOUSE?</span>
 
             <div class="stats-grid">
                 <div class="stat">
-                    <div class="stat-number">65,000+</div>
+                    <div class="stat-number">9,000</div>
                     <div class="stat-label">Certified units in North America</div>
                 </div>
 
                 <div class="stat">
-                    <div class="stat-number">Up to 90%</div>
+                    <div class="stat-number">90%</div>
                     <div class="stat-label">Reduction in heating & cooling energy</div>
                 </div>
 
                 <div class="stat">
-                    <div class="stat-number">60+</div>
+                    <div class="stat-number">60</div>
                     <div class="stat-label">Years of proven building science</div>
                 </div>
 
@@ -1133,14 +1162,22 @@
     <section class="final-cta" id="contact">
         <div class="final-cta-inner">
             <h2>Ready to get started?</h2>
-            <p class="final-cta-subtitle">We work with architects, developers, and builders building to the highest standard. Reach out to discuss how we can help you with your next high-performance project.</p>
-            <button class="btn-primary" onclick="handleCTA()">Start a Project →</button>
-            <p class="final-cta-email">or email us at <a href="mailto:info@bldgtyp.com" class="link">info@bldgtyp.com</a></p>
+            <p class="final-cta-subtitle">We work with architects, developers, and builders constructing to the highest standard. Reach out to discuss how we can help you with your next high-performance project.</p>
+            <button class="btn-primary" onclick="handleCTA()">Reach out today: info@bldgtyp.com</button>
         </div>
     </section>
 
+    <!-- Credentials Strip -->
     <!-- Footer -->
     <footer>
+        <div class="footer-logos">
+            <a href="https://www.phius.org/" target="_blank" rel="noopener" aria-label="PHIUS Certified Consultant">
+                <img src="assets/ph-logos/cphc-logo-image-grid-short.png.webp" alt="PHIUS Certified Passive House Consultant (CPHC)">
+            </a>
+            <a href="https://passivehouse.com/" target="_blank" rel="noopener" aria-label="PHI Certified Passive House Designer">
+                <img src="assets/ph-logos/download.png" alt="PHI Certified Passive House Designer (CPHD)">
+            </a>
+        </div>
         <p>Brooklyn, NY · <a href="mailto:info@bldgtyp.com" class="link">info@bldgtyp.com</a> · © 2026 Building-Type LLC</p>
     </footer>
 
@@ -1189,10 +1226,7 @@
 
         // CTA handler
         function handleCTA() {
-            window.scrollTo({
-                top: document.getElementById('contact').offsetTop - 100,
-                behavior: 'smooth'
-            });
+            window.location.href = 'mailto:info@bldgtyp.com';
         }
 
         // Smooth scroll for nav links
