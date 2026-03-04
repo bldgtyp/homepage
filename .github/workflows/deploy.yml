@@ -19,14 +19,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy via LFTP
-        uses: pressidium/lftp-mirror-action@v1
-        with:
-          host: ${{ secrets.FTP_HOST }}
-          user: ${{ secrets.FTP_USER }}
-          pass: ${{ secrets.FTP_PASS }}
-          localDir: "./site/"
-          remoteDir: "/home/dh_23t94q/bldgtyp.com/"
-          options: "--only-newer --parallel=4 --verbose"
-          # --only-newer:       Only upload files that have changed
-          # --parallel=4:       Upload 4 files at a time for speed
-          # --verbose:         Enable verbose output for debugging
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -u "${{ secrets.FTP_USER }},${{ secrets.FTP_PASS }}" \
+               sftp://${{ secrets.FTP_HOST }} -e "
+            set net:timeout 30;
+            set net:max-retries 3;
+            set sftp:auto-confirm yes;
+            mirror --reverse --only-newer --verbose \
+              ./site/ /home/dh_23t94q/bldgtyp.com/;
+            bye
+          "
