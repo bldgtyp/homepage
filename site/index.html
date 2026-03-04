@@ -6,18 +6,16 @@
     <title>BLDGTYP · Passive House Consulting · Brooklyn</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://bldgtyp.github.io/branding/tokens/tokens.css">
+    <link rel="stylesheet" href="https://bldgtyp.github.io/branding/tokens/components.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ==========================================================
+           BLDGTYP Homepage — Page-specific styles only.
+           Design tokens: branding/tokens/tokens.css
+           Components:    branding/tokens/components.css
+           ========================================================== */
 
-        /* Design tokens loaded from branding/tokens.css */
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-page);
@@ -25,15 +23,13 @@
             font-family: var(--font-primary);
             font-weight: 300;
             line-height: 1.7;
-            transition: all 0.3s ease;
+            transition: all var(--transition-base);
         }
 
-        /* ========== NAVIGATION ========== */
+        /* ========== NAVIGATION (layout only) ========== */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 60px;
             display: flex;
             justify-content: space-between;
@@ -41,7 +37,7 @@
             padding: 0 40px;
             background-color: transparent;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: all var(--transition-base);
         }
 
         nav.scrolled {
@@ -50,6 +46,8 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
+        /* .nav-brand typography comes close to type-mono-label but
+           uses --font-primary with wider letter-spacing (0.3em) */
         .nav-brand {
             font-family: var(--font-primary);
             font-weight: 500;
@@ -58,12 +56,9 @@
             text-transform: uppercase;
             color: var(--text-primary);
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: color var(--transition-base);
         }
-
-        .nav-brand:hover {
-            color: var(--accent);
-        }
+        .nav-brand:hover { color: var(--accent); }
 
         .nav-right {
             display: flex;
@@ -77,65 +72,7 @@
             align-items: center;
         }
 
-        .nav-links a {
-            font-family: var(--font-mono);
-            font-weight: 300;
-            font-size: 11px;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .theme-toggle {
-            width: 32px;
-            height: 32px;
-            background-color: transparent;
-            border: 1px solid var(--border-subtle);
-            border-radius: 3px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .icon-btn {
-            width: 32px;
-            height: 32px;
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-base);
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .icon-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .icon-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+        /* nav link typography inherits from .type-mono-nav in components.css */
 
         /* ========== HERO SECTION ========== */
         .hero {
@@ -148,11 +85,9 @@
             overflow: hidden;
         }
 
-        /* Drafting-table background image */
         .hero-bg-img {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 110%;
             max-width: 1400px;
@@ -164,7 +99,6 @@
             opacity: 0.12;
             filter: grayscale(100%);
         }
-
         [data-theme="dark"] .hero-bg-img {
             opacity: 0.08;
             filter: grayscale(100%) invert(1);
@@ -177,6 +111,7 @@
             text-align: left;
         }
 
+        /* hero-label is similar to .type-mono-label but uses 14px / 0.12em */
         .hero-label {
             font-family: var(--font-mono);
             font-weight: 300;
@@ -188,12 +123,9 @@
             display: block;
         }
 
+        /* .type-hero from components.css provides the base typography;
+           page-specific overrides below */
         .hero-title {
-            font-family: var(--font-primary);
-            font-weight: 600;
-            font-size: clamp(3rem, 6vw, 5.5rem);
-            letter-spacing: -0.02em;
-            line-height: 1.15;
             margin-bottom: 28px;
             color: var(--text-primary);
         }
@@ -208,59 +140,16 @@
             max-width: 650px;
         }
 
-        .hero-cta {
-            font-family: var(--font-mono);
-            font-weight: 400;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            background-color: var(--accent);
-            color: #111111;
-            border: none;
-            padding: 16px 42px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .hero-cta:hover {
-            background-color: var(--accent-dark);
-            transform: translateY(-2px);
-        }
+        /* .btn-primary from components.css provides base button styles;
+           .hero-cta adds no additional overrides currently */
 
         /* ========== SERVICES SECTION ========== */
         .services {
             padding: 120px 40px;
-            position: relative;
             background-color: var(--bg-page);
         }
 
-        .services::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        [data-theme="dark"] .services::before {
-            background-image:
-                url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='20' y2='0' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3Cline x1='0' y1='0' x2='0' y2='20' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='none' stroke='rgba(122,148,36,0.12)' stroke-width='0.8'/%3E%3C/svg%3E");
-            background-size: 20px 20px, 100px 100px;
-        }
-
-        [data-theme="light"] .services::before {
-            background-image:
-                url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='20' y2='0' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3Cline x1='0' y1='0' x2='0' y2='20' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='none' stroke='rgba(122,148,36,0.12)' stroke-width='0.8'/%3E%3C/svg%3E");
-            background-size: 20px 20px, 100px 100px;
-        }
+        /* graph-paper background comes from .graph-paper in components.css */
 
         .services-inner {
             position: relative;
@@ -269,16 +158,7 @@
             margin: 0 auto;
         }
 
-        .section-label {
-            font-family: var(--font-mono);
-            font-weight: 300;
-            font-size: 12px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 48px;
-            display: block;
-        }
+        /* .section-label from components.css */
 
         .services-grid {
             display: grid;
@@ -287,18 +167,11 @@
             margin-top: 48px;
         }
 
+        /* .service-card base from components.css; page overrides: */
         .service-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: 3px;
-            padding: 40px 32px;
-            transition: all 0.3s ease;
-            position: relative;
-            border-bottom: 2px solid var(--accent);
+            max-width: none; /* override component 340px cap for grid layout */
         }
-
         .service-card:hover {
-            border-top: 3px solid var(--highlight);
             transform: translateY(-2px);
         }
 
@@ -310,38 +183,12 @@
             align-items: center;
             justify-content: center;
         }
-
         .service-icon svg {
             width: 100%;
             height: 100%;
         }
 
-        .service-title {
-            font-family: var(--font-primary);
-            font-weight: 600;
-            font-size: 16px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .service-subtitle {
-            font-family: var(--font-primary);
-            font-weight: 500;
-            font-size: 20px;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .service-desc {
-            font-family: var(--font-primary);
-            font-weight: 300;
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--text-secondary);
-        }
+        /* .service-card__title, __subtitle, __body from components.css */
 
         /* ========== WHO WE WORK WITH ========== */
         .who-section {
@@ -378,7 +225,6 @@
             height: 80px;
             margin-bottom: 32px;
         }
-
         .who-icon svg {
             width: 100%;
             height: 100%;
@@ -427,6 +273,8 @@
             position: relative;
         }
 
+        /* Process uses a custom 40px single-layer grid (not a standard
+           graph-paper density), so we keep inline SVG background here */
         .process::before {
             content: '';
             position: absolute;
@@ -434,11 +282,9 @@
             pointer-events: none;
             z-index: 0;
         }
-
         [data-theme="dark"] .process::before {
             background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='rgba(122,148,36,0.06)' stroke-width='0.5' fill='none'%3E%3Cline x1='0' y1='0' x2='40' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='40'/%3E%3C/g%3E%3C/svg%3E");
         }
-
         [data-theme="light"] .process::before {
             background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='rgba(122,148,36,0.08)' stroke-width='0.5' fill='none'%3E%3Cline x1='0' y1='0' x2='40' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='40'/%3E%3C/g%3E%3C/svg%3E");
         }
@@ -462,9 +308,7 @@
         .process-timeline::before {
             content: '';
             position: absolute;
-            top: 30px;
-            left: 0;
-            right: 0;
+            top: 30px; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(to right, var(--accent) 50%, transparent 50%);
             background-size: 20px 2px;
@@ -477,7 +321,6 @@
                 flex-direction: column;
                 gap: 60px;
             }
-
             .process-timeline::before {
                 content: none;
             }
@@ -563,7 +406,7 @@
         .report-mockup {
             background-color: var(--bg-card);
             border: 2px solid var(--accent);
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             padding: 32px;
             min-height: 500px;
             display: flex;
@@ -616,9 +459,7 @@
         .report-bar:nth-child(3) { height: 45%; }
         .report-bar:nth-child(4) { height: 70%; }
 
-        .report-table {
-            margin-bottom: 32px;
-        }
+        .report-table { margin-bottom: 32px; }
 
         .report-table-row {
             display: grid;
@@ -627,10 +468,7 @@
             padding: 12px 0;
             border-bottom: 1px solid var(--border-subtle);
         }
-
-        .report-table-row:first-child {
-            padding-bottom: 12px;
-        }
+        .report-table-row:first-child { padding-bottom: 12px; }
 
         .report-table-label {
             font-family: var(--font-mono);
@@ -649,7 +487,7 @@
 
         .report-assembly {
             height: 160px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             overflow: hidden;
             position: relative;
             border: 1px solid var(--border-subtle);
@@ -669,9 +507,7 @@
 
         .report-assembly-label {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             padding: 6px 10px;
             font-family: var(--font-mono);
             font-weight: 300;
@@ -790,12 +626,9 @@
             color: var(--text-primary);
             text-decoration: none;
             border-bottom: 1px solid var(--accent);
-            transition: all 0.3s ease;
+            transition: all var(--transition-base);
         }
-
-        .oss-text a:hover {
-            color: var(--accent);
-        }
+        .oss-text a:hover { color: var(--accent); }
 
         /* ========== STATS SECTION ========== */
         .stats {
@@ -809,26 +642,16 @@
             margin: 0 auto;
         }
 
-        .stats-label {
-            font-family: var(--font-mono);
-            font-weight: 300;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 60px;
-        }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 60px;
+            margin-top: 60px;
         }
 
-        .stat {
-            text-align: left;
-        }
+        .stat { text-align: left; }
 
+        /* stat numbers use responsive clamp instead of component fixed 48px */
         .stat-number {
             font-family: var(--font-primary);
             font-weight: 600;
@@ -881,27 +704,9 @@
             margin-bottom: 40px;
         }
 
-        .final-cta-button {
-            font-family: var(--font-mono);
-            font-weight: 400;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            background-color: var(--accent);
-            color: #111111;
-            border: none;
-            padding: 16px 42px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
+        /* .btn-primary from components.css; page override adds bottom margin */
+        .final-cta .btn-primary {
             margin-bottom: 20px;
-        }
-
-        .final-cta-button:hover {
-            background-color: var(--accent-dark);
-            transform: translateY(-2px);
         }
 
         .final-cta-email {
@@ -931,90 +736,33 @@
         footer a {
             color: var(--accent);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color var(--transition-base);
         }
-
-        footer a:hover {
-            color: var(--accent-dark);
-        }
+        footer a:hover { color: var(--accent-dark); }
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            nav {
-                padding: 0 20px;
-            }
-
-            .nav-right {
-                gap: 20px;
-            }
-
-            .nav-links {
-                gap: 16px;
-            }
-
-            .hero {
-                padding: 100px 20px;
-                min-height: auto;
-            }
-
-            .hero-ghost-bg {
-                opacity: 0.03;
-                width: 300px;
-                height: 300px;
-                right: -150px;
-            }
-
-            .services {
-                padding: 80px 20px;
-            }
-
-            .who-section {
-                padding: 80px 20px;
-            }
-
-            .process {
-                padding: 80px 20px;
-            }
-
-            .deliverable {
-                padding: 80px 20px;
-            }
-
-            .stats {
-                padding: 80px 20px;
-            }
-
-            .final-cta {
-                padding: 80px 20px;
-            }
-
-            .services-grid {
-                gap: 20px;
-            }
-
-            .who-grid {
-                gap: 40px;
-            }
-
-            .deliverable-grid {
-                gap: 40px;
-            }
-
-            .report-mockup {
-                min-height: 400px;
-            }
+            nav { padding: 0 20px; }
+            .nav-right { gap: 20px; }
+            .nav-links { gap: 16px; }
+            .hero { padding: 100px 20px; min-height: auto; }
+            .hero-ghost-bg { opacity: 0.03; width: 300px; height: 300px; right: -150px; }
+            .services { padding: 80px 20px; }
+            .who-section { padding: 80px 20px; }
+            .process { padding: 80px 20px; }
+            .deliverable { padding: 80px 20px; }
+            .stats { padding: 80px 20px; }
+            .final-cta { padding: 80px 20px; }
+            .services-grid { gap: 20px; }
+            .who-grid { gap: 40px; }
+            .deliverable-grid { gap: 40px; }
+            .report-mockup { min-height: 400px; }
         }
 
         /* ========== ANIMATIONS ========== */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .hero-content {
@@ -1036,16 +784,18 @@
         <div class="nav-brand" onclick="scrollToTop()">BLDGTYP</div>
         <div class="nav-right">
             <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#process">Process</a>
-                <a href="#contact">Contact</a>
+                <a href="#services" class="type-mono-nav">Services</a>
+                <a href="#process" class="type-mono-nav">Process</a>
+                <a href="#contact" class="type-mono-nav">Contact</a>
             </div>
-            <a href="https://www.youtube.com/@edmay8900/playlists" target="_blank" rel="noopener" class="icon-btn" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-            <a href="https://github.com/bldgtyp" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            </a>
+            <div class="nav-icons">
+                <a href="https://www.youtube.com/@edmay8900/playlists" target="_blank" rel="noopener" class="icon-btn" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="https://github.com/bldgtyp" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+            </div>
             <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
                 <span id="theme-icon">☽</span>
             </button>
@@ -1058,14 +808,14 @@
 
         <div class="hero-content">
             <span class="hero-label">BLDGTYP · PASSIVE HOUSE DESIGN & CONSULTING</span>
-            <h1 class="hero-title">Your Passive House questions.<br>Answered.</h1>
+            <h1 class="type-hero hero-title">Your Passive House questions.<br>Answered.</h1>
             <p class="hero-subtitle">Passive House design and consulting for architects, developers, and builders. We model the answers so you can build with confidence.</p>
-            <button class="hero-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project →</button>
+            <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project →</button>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services" id="services">
+    <section class="services graph-paper" id="services">
         <div class="services-inner">
             <span class="section-label">WHAT WE DO</span>
 
@@ -1096,9 +846,9 @@
                             <line x1="60" y1="90" x2="60" y2="110" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.7"/>
                         </svg>
                     </div>
-                    <h3 class="service-title">ENERGY MODELING</h3>
-                    <h4 class="service-subtitle">Know before you build</h4>
-                    <p class="service-desc">We model your building's energy performance so you can make design decisions with real data — not assumptions. From envelope to mechanicals, every system is accounted for.</p>
+                    <h3 class="service-card__title">ENERGY MODELING</h3>
+                    <h4 class="service-card__subtitle">Know before you build</h4>
+                    <p class="service-card__body">We model your building's energy performance so you can make design decisions with real data — not assumptions. From envelope to mechanicals, every system is accounted for.</p>
                 </div>
 
                 <!-- Service Card 2: Thermal Bridges -->
@@ -1121,9 +871,9 @@
                             <path d="M 75 65 L 95 65" stroke="var(--highlight)" stroke-width="1.5" opacity="0.7"/>
                         </svg>
                     </div>
-                    <h3 class="service-title">THERMAL BRIDGES</h3>
-                    <h4 class="service-subtitle">Find the hidden losses</h4>
-                    <p class="service-desc">3D finite-element thermal bridge modeling identifies where your envelope is bleeding performance — before construction begins. Every junction, every connection, quantified.</p>
+                    <h3 class="service-card__title">THERMAL BRIDGES</h3>
+                    <h4 class="service-card__subtitle">Find the hidden losses</h4>
+                    <p class="service-card__body">3D finite-element thermal bridge modeling identifies where your envelope is bleeding performance — before construction begins. Every junction, every connection, quantified.</p>
                 </div>
 
                 <!-- Service Card 3: Certification -->
@@ -1141,9 +891,9 @@
                             <line x1="75" y1="75" x2="75" y2="110" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
                         </svg>
                     </div>
-                    <h3 class="service-title">CERTIFICATION</h3>
-                    <h4 class="service-subtitle">Cross the finish line</h4>
-                    <p class="service-desc">PHIUS and PHI certification support from schematic design through final verification. We handle the modeling, the documentation, and the review process.</p>
+                    <h3 class="service-card__title">CERTIFICATION</h3>
+                    <h4 class="service-card__subtitle">Cross the finish line</h4>
+                    <p class="service-card__body">PHIUS and PHI certification support from schematic design through final verification. We handle the modeling, the documentation, and the review process.</p>
                 </div>
             </div>
         </div>
@@ -1384,7 +1134,7 @@
     <!-- Stats Section -->
     <section class="stats" id="stats">
         <div class="stats-inner">
-            <span class="stats-label">WHY PASSIVE HOUSE</span>
+            <span class="section-label">WHY PASSIVE HOUSE</span>
 
             <div class="stats-grid">
                 <div class="stat">
@@ -1415,7 +1165,7 @@
         <div class="final-cta-inner">
             <h2>Ready to model your next project?</h2>
             <p class="final-cta-subtitle">We work with architects, developers, and builders building to the highest standard. Reach out to start the conversation.</p>
-            <button class="final-cta-button" onclick="handleCTA()">Start a Project →</button>
+            <button class="btn-primary" onclick="handleCTA()">Start a Project →</button>
             <p class="final-cta-email">or email us at <a href="mailto:info@bldgtyp.com">info@bldgtyp.com</a></p>
         </div>
     </section>
