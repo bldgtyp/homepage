@@ -6,7 +6,7 @@ Source for the BLDGTYP company homepage. Deploys automatically to Dreamhost via 
 
 ```
 homepage/
-├── .github/workflows/deploy.yml   ← GitHub Actions FTP deploy
+├── .github/workflows/deploy.yml    ← GitHub Actions FTP deploy
 ├── site/                           ← Everything in here gets uploaded to Dreamhost
 │   ├── index.html                  ← The homepage
 │   └── assets/
