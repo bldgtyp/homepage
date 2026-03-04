@@ -1,1401 +1,1503 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Passive House design and consulting for architects, developers, and builders in Brooklyn, NY. Expert energy modeling, thermal bridge analysis, and PHIUS/PHI certification support.">
-  <meta name="theme-color" content="#7a9424">
-
-  <!-- SEO & OpenGraph -->
-  <title>BLDGTYP · Passive House Design & Consulting · Brooklyn, NY</title>
-  <link rel="canonical" href="https://www.bldgtyp.com">
-  <meta property="og:title" content="BLDGTYP · Passive House Design & Consulting · Brooklyn, NY">
-  <meta property="og:description" content="Expert Passive House consulting for architects, developers, and builders. Energy modeling, thermal bridge analysis, and certification support.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.bldgtyp.com">
-
-  <!-- Google Fonts with preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-
-  <style>
-    /* Design System Tokens */
-    :root {
-      --accent: #7a9424;
-      --accent-light: #e8ecd8;
-      --accent-dark: #4a5916;
-      --highlight: #DC2626;
-      --highlight-light: #fde8e8;
-      --highlight-dark: #991b1b;
-
-      --font-primary: 'Outfit', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-
-      --radius: 3px;
-      --transition: 0.3s ease;
-    }
-
-    /* Light Theme (default) */
-    html[data-theme="light"] {
-      --bg-page: #ffffff;
-      --bg-card: #ffffff;
-      --bg-section-alt: #F8F9FA;
-      --text-primary: #111111;
-      --text-secondary: #6b7280;
-      --text-muted: #9ca3af;
-      --border-subtle: #e5e7eb;
-      --bg-overlay: rgba(255, 255, 255, 0.95);
-      --bg-overlay-card: rgba(255, 255, 255, 0.7);
-      --hero-bg-opacity: 0.12;
-      --hero-bg-filter: none;
-    }
-
-    /* Dark Theme */
-    html[data-theme="dark"] {
-      --bg-page: #111111;
-      --bg-card: #1a1a1a;
-      --bg-section-alt: #161616;
-      --text-primary: #ffffff;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
-      --border-subtle: #2a2a2a;
-      --bg-overlay: rgba(17, 17, 17, 0.95);
-      --bg-overlay-card: rgba(26, 26, 26, 0.7);
-      --hero-bg-opacity: 0.08;
-      --hero-bg-filter: invert(1);
-    }
-
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg-page);
-    }
-
-    body {
-      font-family: var(--font-primary);
-      background-color: var(--bg-page);
-      color: var(--text-primary);
-      line-height: 1.6;
-      transition: background-color var(--transition), color var(--transition);
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 600;
-      line-height: 1.2;
-    }
-
-    p {
-      color: var(--text-secondary);
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
-
-    a:hover {
-      color: var(--highlight);
-    }
-
-    /* Fixed Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background-color var(--transition), border-color var(--transition);
-    }
-
-    nav.scrolled {
-      background: var(--bg-overlay);
-      border-bottom-color: var(--border-subtle);
-      backdrop-filter: blur(8px);
-    }
-
-    .nav-brand {
-      font-family: var(--font-primary);
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: color var(--transition);
-    }
-
-    .nav-brand:hover {
-      color: var(--accent);
-    }
-
-    .nav-center {
-      display: flex;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 48px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      transition: color var(--transition);
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: var(--text-primary);
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .theme-toggle {
-      background: none;
-      border: 1px solid var(--border-subtle);
-      padding: 8px 12px;
-      border-radius: var(--radius);
-      color: var(--text-primary);
-      cursor: pointer;
-      font-size: 16px;
-      transition: border-color var(--transition), background-color var(--transition);
-      font-family: var(--font-mono);
-      font-weight: 300;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      background: var(--bg-section-alt);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 40px 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('assets/hero-drafting.png');
-      background-size: cover;
-      background-position: center;
-      opacity: var(--hero-bg-opacity);
-      filter: grayscale(1) var(--hero-bg-filter);
-      z-index: 0;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      animation: fadeInUp 1s ease 0.2s backwards;
-    }
-
-    .hero-label {
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 14px;
-      letter-spacing: 0em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      animation: fadeInUp 1s ease 0.3s backwards;
-    }
-
-    .hero-title {
-      font-family: var(--font-primary);
-      font-weight: 600;
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-      line-height: 1.1;
-      animation: fadeInUp 1s ease 0.4s backwards;
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 22px;
-      color: var(--text-secondary);
-      margin-bottom: 40px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      animation: fadeInUp 1s ease 0.5s backwards;
-    }
-
-    .btn {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-weight: 400;
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 16px 42px;
-      border: 1px solid var(--accent);
-      border-radius: var(--radius);
-      background: var(--accent);
-      color: #111111;
-      cursor: pointer;
-      transition: all var(--transition);
-      text-decoration: none;
-    }
-
-    .btn:hover {
-      background: transparent;
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-    }
-
-    .btn-secondary:hover {
-      background: var(--accent);
-      color: #111111;
-    }
-
-    /* Fade-in animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    .fade-in {
-      animation: fadeInUp 0.6s ease forwards;
-      opacity: 0;
-    }
-
-    /* Services Section */
-    .services {
-      padding: 80px 40px;
-      background: var(--bg-page);
-      position: relative;
-    }
-
-    .services::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image:
-        linear-gradient(0deg, rgba(122, 148, 36, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(122, 148, 36, 0.06) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(122, 148, 36, 0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(122, 148, 36, 0.12) 1px, transparent 1px);
-      background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
-      background-position: 0 0, 0 0, 0 0, 0 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    html[data-theme="dark"] .services::before {
-      background-image:
-        linear-gradient(0deg, rgba(122, 148, 36, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(122, 148, 36, 0.06) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(122, 148, 36, 0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(122, 148, 36, 0.12) 1px, transparent 1px);
-    }
-
-    .section-label {
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 60px;
-      text-align: center;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius);
-      padding: 40px 32px;
-      border-bottom: 2px solid var(--accent);
-      transition: all var(--transition);
-      position: relative;
-    }
-
-    .service-card:hover {
-      border-top: 3px solid var(--highlight);
-      border-bottom: 2px solid var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    html[data-theme="dark"] .service-card:hover {
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .service-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 24px;
-    }
-
-    .service-title {
-      font-family: var(--font-primary);
-      font-weight: 600;
-      font-size: 16px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .service-subtitle {
-      font-family: var(--font-primary);
-      font-weight: 500;
-      font-size: 20px;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-      line-height: 1.3;
-    }
-
-    .service-description {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Who We Work With Section */
-    .who-section {
-      padding: 80px 40px;
-      background: var(--bg-section-alt);
-    }
-
-    .who-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .who-card {
-      text-align: center;
-    }
-
-    .who-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 24px;
-    }
-
-    .who-heading {
-      font-family: var(--font-primary);
-      font-weight: 600;
-      font-size: 18px;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-    }
-
-    .who-tagline {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-
-    .who-description {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .who-projects {
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border-subtle);
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Process Section */
-    .process {
-      padding: 80px 40px;
-      background: var(--bg-page);
-      position: relative;
-    }
-
-    .process::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image:
-        linear-gradient(0deg, rgba(122, 148, 36, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(122, 148, 36, 0.03) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(122, 148, 36, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(122, 148, 36, 0.06) 1px, transparent 1px);
-      background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .process-timeline {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .process-timeline::before {
-      content: '';
-      position: absolute;
-      top: 30px;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--accent);
-      border-top: 1px dashed var(--accent);
-      z-index: 0;
-    }
-
-    .process-step {
-      position: relative;
-      z-index: 1;
-      flex: 1;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    .process-circle {
-      width: 60px;
-      height: 60px;
-      margin: 0 auto 20px;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-page);
-      font-family: var(--font-primary);
-      font-weight: 500;
-      font-size: 18px;
-      color: var(--accent);
-    }
-
-    .process-label {
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-primary);
-      max-width: 120px;
-      margin: 0 auto;
-    }
-
-    /* Deliverable Section */
-    .deliverable {
-      padding: 80px 40px;
-      background: var(--bg-section-alt);
-    }
-
-    .deliverable-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .deliverable-mockup {
-      background: var(--bg-card);
-      border: 2px solid var(--accent);
-      border-radius: var(--radius);
-      padding: 32px;
-      aspect-ratio: 4 / 5;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .deliverable-header {
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 16px;
-      margin-bottom: 24px;
-    }
-
-    .report-title {
-      font-family: var(--font-primary);
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .report-subtitle {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-
-    .energy-chart {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .chart-bar {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .bar {
-      width: 100%;
-      background: var(--border-subtle);
-      border-radius: 2px;
-      margin-bottom: 8px;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      background: var(--accent);
-      height: 60px;
-      width: 100%;
-      border-radius: 2px;
-    }
-
-    .bar-label {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 10px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    .report-table {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      width: 100%;
-      margin-bottom: 24px;
-      border-collapse: collapse;
-    }
-
-    .report-table tr {
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .report-table td {
-      padding: 8px 0;
-      text-align: left;
-      color: var(--text-secondary);
-    }
-
-    .report-table td:last-child {
-      text-align: right;
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .report-image {
-      width: 100%;
-      height: 120px;
-      background: var(--bg-section-alt);
-      border-radius: var(--radius);
-      margin-bottom: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .report-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: var(--hero-bg-filter);
-    }
-
-    .deliverable-content h3 {
-      font-family: var(--font-primary);
-      font-weight: 600;
-      font-size: 32px;
-      color: var(--text-primary);
-      margin-bottom: 24px;
-      line-height: 1.3;
-    }
-
-    .deliverable-list {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .deliverable-list li {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 16px;
-      color: var(--text-secondary);
-      padding-left: 24px;
-      margin-bottom: 12px;
-      position: relative;
-    }
-
-    .deliverable-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .deliverable-closing {
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--accent);
-      line-height: 1.6;
-    }
-
-    /* Open Source Strip */
-    .open-source {
-      padding: 40px;
-      background: var(--bg-page);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      text-align: center;
-    }
-
-    .open-source-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-    }
-
-    .open-source-label {
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      white-space: nowrap;
-    }
-
-    .open-source-divider {
-      width: 1px;
-      height: 20px;
-      background: var(--border-subtle);
-    }
-
-    .open-source-text {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    .open-source-text a {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    /* Stats Section */
-    .stats {
-      padding: 80px 40px;
-      background: #111111;
-      color: #ffffff;
-    }
-
-    .stats-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      text-align: center;
-    }
-
-    .stat-item {
-      position: relative;
-    }
-
-    .stat-number {
-      font-family: var(--font-primary);
-      font-weight: 600;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 12px;
-      color: var(--accent);
-    }
-
-    .stat-item:nth-child(3) .stat-number {
-      color: var(--highlight);
-    }
-
-    .stat-label {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 16px;
-      color: #ffffff;
-      line-height: 1.5;
-    }
-
-    /* Contact CTA Section */
-    .contact-cta {
-      padding: 80px 40px;
-      background: var(--bg-page);
-      text-align: center;
-    }
-
-    .contact-cta h2 {
-      font-family: var(--font-primary);
-      font-weight: 600;
-      font-size: 48px;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .contact-cta p {
-      font-family: var(--font-primary);
-      font-weight: 300;
-      font-size: 18px;
-      color: var(--text-secondary);
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .contact-email {
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      margin-top: 32px;
-    }
-
-    .contact-email a {
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    /* Footer */
-    footer {
-      padding: 40px;
-      background: var(--bg-section-alt);
-      border-top: 1px solid var(--border-subtle);
-      text-align: center;
-    }
-
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      font-family: var(--font-mono);
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      color: var(--text-secondary);
-    }
-
-    .footer-content a {
-      color: var(--accent);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav {
-        padding: 16px 20px;
-      }
-
-      .nav-center {
-        display: none;
-      }
-
-      .nav-center.active {
-        display: flex;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-        background: var(--bg-overlay);
-        border-bottom: 1px solid var(--border-subtle);
-        z-index: 999;
-      }
-
-      .nav-links {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .nav-toggle {
-        display: block;
-      }
-
-      .hero {
-        padding: 100px 20px 40px;
-        min-height: auto;
-      }
-
-      .hero-subtitle {
-        font-size: 16px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .who-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .process-timeline {
-        flex-direction: column;
-        gap: 40px;
-      }
-
-      .process-timeline::before {
-        top: auto;
-        left: 30px;
-        right: auto;
-        width: 1px;
-        height: 100%;
-        background: transparent;
-        border-left: 1px dashed var(--accent);
-      }
-
-      .process-step {
-        text-align: left;
-        padding: 0 0 0 80px;
-      }
-
-      .process-circle {
-        margin: 0;
-      }
-
-      .deliverable-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .deliverable-mockup {
-        aspect-ratio: auto;
-        min-height: 400px;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-      }
-
-      .contact-cta h2 {
-        font-size: 32px;
-      }
-
-      .services, .who-section, .process, .deliverable, .contact-cta {
-        padding: 60px 20px;
-      }
-
-      .section-label {
-        margin-bottom: 40px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: clamp(2rem, 5vw, 3rem);
-      }
-
-      .hero-subtitle {
-        font-size: 14px;
-      }
-
-      .btn {
-        font-size: 12px;
-        padding: 12px 32px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .contact-cta h2 {
-        font-size: 24px;
-      }
-
-      .services, .who-section, .process, .deliverable, .contact-cta {
-        padding: 40px 16px;
-      }
-
-      .deliverable-mockup {
-        padding: 20px;
-      }
-
-      .who-card .who-heading {
-        font-size: 16px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLDGTYP · Passive House Consulting · Brooklyn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #7a9424;
+            --accent-light: #e8ecd8;
+            --accent-dark: #4a5916;
+            --highlight: #DC2626;
+            --highlight-light: #fde8e8;
+            --highlight-dark: #991b1b;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        [data-theme="dark"] {
+            --bg-page: #111111;
+            --bg-card: #1a1a1a;
+            --bg-section-alt: #161616;
+            --bg-stats: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: #2a2a2a;
+            --border-card: #2a2a2a;
+            --svg-line-heavy: rgba(255,255,255,0.5);
+            --svg-line-medium: rgba(255,255,255,0.3);
+            --svg-line-light: rgba(255,255,255,0.15);
+            --svg-line-faint: rgba(255,255,255,0.08);
+            --svg-fill-dot: rgba(255,255,255,0.12);
+            --svg-text: rgba(255,255,255,0.4);
+        }
+
+        [data-theme="light"] {
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --bg-section-alt: #F8F9FA;
+            --bg-stats: #111111;
+            --text-primary: #111111;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --border-subtle: #e5e7eb;
+            --border-card: #e5e7eb;
+            --svg-line-heavy: rgba(0,0,0,0.5);
+            --svg-line-medium: rgba(0,0,0,0.3);
+            --svg-line-light: rgba(0,0,0,0.15);
+            --svg-line-faint: rgba(0,0,0,0.08);
+            --svg-fill-dot: rgba(0,0,0,0.12);
+            --svg-text: rgba(0,0,0,0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            transition: all 0.3s ease;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            background-color: transparent;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background-color: var(--bg-page);
+            border-bottom: 1px solid var(--border-subtle);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            color: var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Drafting-table background image */
+        .hero-bg-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            max-width: 1400px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="light"] .hero-bg-img {
+            opacity: 0.12;
+            filter: grayscale(100%);
+        }
+
+        [data-theme="dark"] .hero-bg-img {
+            opacity: 0.08;
+            filter: grayscale(100%) invert(1);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 750px;
+            text-align: left;
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 32px;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .hero-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 650px;
+        }
+
+        .hero-cta {
+            font-family: var(--font-mono);
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background-color: var(--accent);
+            color: #111111;
+            border: none;
+            padding: 16px 42px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .hero-cta:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ========== SERVICES SECTION ========== */
+        .services {
+            padding: 120px 40px;
+            position: relative;
+            background-color: var(--bg-page);
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .services::before {
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='20' y2='0' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3Cline x1='0' y1='0' x2='0' y2='20' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='none' stroke='rgba(122,148,36,0.12)' stroke-width='0.8'/%3E%3C/svg%3E");
+            background-size: 20px 20px, 100px 100px;
+        }
+
+        [data-theme="light"] .services::before {
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='20' y2='0' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3Cline x1='0' y1='0' x2='0' y2='20' stroke='rgba(122,148,36,0.06)' stroke-width='0.5'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='none' stroke='rgba(122,148,36,0.12)' stroke-width='0.8'/%3E%3C/svg%3E");
+            background-size: 20px 20px, 100px 100px;
+        }
+
+        .services-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 48px;
+            display: block;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 3px;
+            padding: 40px 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .service-card:hover {
+            border-top: 3px solid var(--highlight);
+            transform: translateY(-2px);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .service-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .service-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .service-desc {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* ========== WHO WE WORK WITH ========== */
+        .who-section {
+            padding: 120px 40px;
+            background-color: var(--bg-section-alt);
+        }
+
+        .who-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .who-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .who-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+        }
+
+        .who-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .who-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 32px;
+        }
+
+        .who-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .who-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .who-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .who-body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .who-detail {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ========== PROCESS SECTION ========== */
+        .process {
+            padding: 120px 40px;
+            background-color: var(--bg-page);
+            position: relative;
+        }
+
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .process::before {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='rgba(122,148,36,0.06)' stroke-width='0.5' fill='none'%3E%3Cline x1='0' y1='0' x2='40' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='40'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        [data-theme="light"] .process::before {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='rgba(122,148,36,0.08)' stroke-width='0.5' fill='none'%3E%3Cline x1='0' y1='0' x2='40' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='40'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .process-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-timeline {
+            display: flex;
+            gap: 24px;
+            margin-top: 80px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent) 50%, transparent 50%);
+            background-size: 20px 2px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .process-timeline {
+                flex-direction: column;
+                gap: 60px;
+            }
+
+            .process-timeline::before {
+                content: none;
+            }
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 170px;
+            padding-right: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 24px;
+            color: var(--accent);
+            background-color: var(--bg-page);
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+
+        .step-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .step-desc {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            max-width: 200px;
+        }
+
+        /* ========== DELIVERABLE SECTION ========== */
+        .deliverable {
+            padding: 120px 40px;
+            background-color: var(--bg-section-alt);
+        }
+
+        .deliverable-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .deliverable-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .deliverable-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+        }
+
+        .report-mockup {
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: 3px;
+            padding: 32px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .report-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .report-project {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .report-chart {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            height: 80px;
+            margin-bottom: 32px;
+        }
+
+        .report-bar {
+            flex: 1;
+            background-color: var(--accent);
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+
+        .report-bar:nth-child(1) { height: 60%; }
+        .report-bar:nth-child(2) { height: 85%; }
+        .report-bar:nth-child(3) { height: 45%; }
+        .report-bar:nth-child(4) { height: 70%; }
+
+        .report-table {
+            margin-bottom: 32px;
+        }
+
+        .report-table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .report-table-row:first-child {
+            padding-bottom: 12px;
+        }
+
+        .report-table-label {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .report-table-value {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+
+        .report-assembly {
+            height: 160px;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .report-assembly img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        [data-theme="dark"] .report-assembly img {
+            filter: invert(0.88) hue-rotate(180deg);
+            opacity: 0.85;
+        }
+
+        .report-assembly-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 6px 10px;
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 9px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: linear-gradient(to top, var(--bg-card) 50%, transparent);
+        }
+
+        .deliverable-content h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .deliverable-intro {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .deliverable-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .deliverable-list li {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .deliverable-list li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .deliverable-closing {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+        }
+
+        /* ========== OPEN SOURCE CREDIBILITY STRIP ========== */
+        .oss-strip {
+            padding: 60px 40px;
+            background-color: var(--bg-page);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .oss-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .oss-inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+
+        .oss-label {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .oss-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--border-subtle);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .oss-divider { display: none; }
+        }
+
+        .oss-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .oss-text a {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .oss-text a:hover {
+            color: var(--accent);
+        }
+
+        /* ========== STATS SECTION ========== */
+        .stats {
+            padding: 120px 40px;
+            background-color: var(--bg-stats);
+            color: var(--text-primary);
+        }
+
+        .stats-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stats-label {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 60px;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .stat:nth-child(3) .stat-number {
+            color: var(--highlight);
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        /* ========== CTA SECTION ========== */
+        .final-cta {
+            padding: 120px 40px;
+            background-color: var(--bg-page);
+            text-align: center;
+        }
+
+        .final-cta-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .final-cta-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .final-cta-button {
+            font-family: var(--font-mono);
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background-color: var(--accent);
+            color: #111111;
+            border: none;
+            padding: 16px 42px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .final-cta-button:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .final-cta-email {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            padding: 60px 40px;
+            background-color: var(--bg-section-alt);
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        footer p {
+            font-family: var(--font-mono);
+            font-weight: 300;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-dark);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-right {
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .hero {
+                padding: 100px 20px;
+                min-height: auto;
+            }
+
+            .hero-ghost-bg {
+                opacity: 0.03;
+                width: 300px;
+                height: 300px;
+                right: -150px;
+            }
+
+            .services {
+                padding: 80px 20px;
+            }
+
+            .who-section {
+                padding: 80px 20px;
+            }
+
+            .process {
+                padding: 80px 20px;
+            }
+
+            .deliverable {
+                padding: 80px 20px;
+            }
+
+            .stats {
+                padding: 80px 20px;
+            }
+
+            .final-cta {
+                padding: 80px 20px;
+            }
+
+            .services-grid {
+                gap: 20px;
+            }
+
+            .who-grid {
+                gap: 40px;
+            }
+
+            .deliverable-grid {
+                gap: 40px;
+            }
+
+            .report-mockup {
+                min-height: 400px;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            animation: fadeIn 0.8s ease 0.2s backwards;
+        }
+
+        .service-card {
+            animation: fadeIn 0.6s ease backwards;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.3s; }
+        .service-card:nth-child(2) { animation-delay: 0.4s; }
+        .service-card:nth-child(3) { animation-delay: 0.5s; }
+    </style>
 </head>
-<body>
-  <!-- Navigation -->
-  <nav id="nav">
-    <div class="nav-brand" id="brand">BLDGTYP</div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
-    <div class="nav-center" id="nav-center">
-      <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☽</button>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <div class="hero-label">BLDGTYP · PASSIVE HOUSE DESIGN & CONSULTING</div>
-      <h1 class="hero-title">Your Passive House questions. Answered.</h1>
-      <p class="hero-subtitle">Passive House design and consulting for architects, developers, and builders. We model the answers so you can build with confidence.</p>
-      <button class="btn" id="cta-primary">Start a Project →</button>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section class="services" id="services">
-    <div class="section-label">WHAT WE DO</div>
-    <div class="services-grid">
-      <!-- Energy Modeling Card -->
-      <div class="service-card fade-in">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <path d="M24 12v24M12 24h24" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <circle cx="24" cy="16" r="2" fill="currentColor" color="var(--accent)"/>
-          <circle cx="32" cy="24" r="2" fill="currentColor" color="var(--accent)"/>
-          <circle cx="24" cy="32" r="2" fill="currentColor" color="var(--accent)"/>
-          <circle cx="16" cy="24" r="2" fill="currentColor" color="var(--accent)"/>
-        </svg>
-        <h3 class="service-title">Energy Modeling</h3>
-        <p class="service-subtitle">Know before you build</p>
-        <p class="service-description">We perform rigorous energy modeling to predict heating and cooling loads, helping you understand true performance before construction begins.</p>
-      </div>
-
-      <!-- Thermal Bridges Card -->
-      <div class="service-card fade-in">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="8" width="32" height="32" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <line x1="16" y1="8" x2="16" y2="40" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <line x1="32" y1="8" x2="32" y2="40" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <line x1="8" y1="16" x2="40" y2="16" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <line x1="8" y1="32" x2="40" y2="32" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <circle cx="24" cy="24" r="3" fill="var(--highlight)" color="var(--highlight)"/>
-        </svg>
-        <h3 class="service-title">Thermal Bridges</h3>
-        <p class="service-subtitle">Find the hidden losses</p>
-        <p class="service-description">3D thermal bridge analysis identifies weak points in building envelopes. We help you eliminate unintended heat loss paths.</p>
-      </div>
-
-      <!-- Certification Card -->
-      <div class="service-card fade-in">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 6L32 10V20C32 28 24 38 24 38C24 38 16 28 16 20V10L24 6Z" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <path d="M20 24L22 26L28 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" color="var(--accent)"/>
-        </svg>
-        <h3 class="service-title">Certification</h3>
-        <p class="service-subtitle">Cross the finish line</p>
-        <p class="service-description">We guide projects through PHIUS and PHI certification, ensuring your building meets the highest performance standards.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Who We Work With Section -->
-  <section class="who-section" id="who">
-    <div class="section-label">WHO WE WORK WITH</div>
-    <div class="who-grid">
-      <!-- Architects -->
-      <div class="who-card fade-in">
-        <svg class="who-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M32 4L52 16V50H12V16L32 4Z" stroke="currentColor" stroke-width="2" color="var(--accent)"/>
-          <line x1="32" y1="4" x2="32" y2="50" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <rect x="20" y="24" width="6" height="8" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <rect x="38" y="24" width="6" height="8" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <rect x="20" y="38" width="6" height="8" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <rect x="38" y="38" width="6" height="8" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-        </svg>
-        <h4 class="who-heading">Architects</h4>
-        <p class="who-tagline">Designing high-performance luxury homes</p>
-        <p class="who-description">You care about craft, comfort, and precision. We provide detailed performance analysis to validate your design intent.</p>
-        <div class="who-projects">Single-family · Townhouse · Brownstone renovation</div>
-      </div>
-
-      <!-- Developers -->
-      <div class="who-card fade-in">
-        <svg class="who-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="12" y="8" width="40" height="48" stroke="currentColor" stroke-width="2" color="var(--accent)"/>
-          <line x1="12" y1="20" x2="52" y2="20" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <line x1="12" y1="32" x2="52" y2="32" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <line x1="12" y1="44" x2="52" y2="44" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <rect x="18" y="12" width="4" height="5" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <rect x="26" y="12" width="4" height="5" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <rect x="34" y="12" width="4" height="5" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-          <rect x="42" y="12" width="4" height="5" stroke="currentColor" stroke-width="1" color="var(--accent)"/>
-        </svg>
-        <h4 class="who-heading">Developers</h4>
-        <p class="who-tagline">Building affordable multifamily at scale</p>
-        <p class="who-description">You need certification, incentives, and marketability. We help you meet codes and appeal to conscious buyers.</p>
-        <div class="who-projects">Affordable housing · Mixed-use · Multifamily</div>
-      </div>
-
-      <!-- Builders -->
-      <div class="who-card fade-in">
-        <svg class="who-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 40L28 20L40 40M24 40V50H36V40" stroke="currentColor" stroke-width="2" color="var(--accent)"/>
-          <line x1="28" y1="30" x2="32" y2="30" stroke="currentColor" stroke-width="1.5" color="var(--accent)"/>
-          <rect x="26" y="25" width="2" height="2" fill="currentColor" color="var(--accent)"/>
-          <rect x="34" y="25" width="2" height="2" fill="currentColor" color="var(--accent)"/>
-          <line x1="10" y1="50" x2="54" y2="50" stroke="currentColor" stroke-width="2" color="var(--accent)"/>
-        </svg>
-        <h4 class="who-heading">Builders</h4>
-        <p class="who-tagline">Getting high-performance details right</p>
-        <p class="who-description">You're building it — and you need to know exactly how. We provide specifications and guidance for flawless execution.</p>
-        <div class="who-projects">Single-family homes · Custom builds · Renovations</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process Section -->
-  <section class="process" id="process">
-    <div class="section-label">HOW IT WORKS</div>
-    <div class="process-timeline">
-      <div class="process-step">
-        <div class="process-circle">1</div>
-        <div class="process-label">Share Your Plans</div>
-      </div>
-      <div class="process-step">
-        <div class="process-circle">2</div>
-        <div class="process-label">We Build Your Model</div>
-      </div>
-      <div class="process-step">
-        <div class="process-circle">3</div>
-        <div class="process-label">Review Together</div>
-      </div>
-      <div class="process-step">
-        <div class="process-circle">4</div>
-        <div class="process-label">Your Report</div>
-      </div>
-      <div class="process-step">
-        <div class="process-circle">5</div>
-        <div class="process-label">Build With Confidence</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Deliverable Section -->
-  <section class="deliverable" id="deliverable">
-    <div class="section-label">YOUR DELIVERABLE</div>
-    <div class="deliverable-grid">
-      <!-- Report Mockup -->
-      <div class="deliverable-mockup fade-in">
-        <div class="deliverable-header">
-          <div class="report-title">Energy Report</div>
-          <div class="report-subtitle">Annual Energy Demand</div>
+<body data-theme="light">
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-brand" onclick="scrollToTop()">BLDGTYP</div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+                <span id="theme-icon">☽</span>
+            </button>
         </div>
+    </nav>
 
-        <div class="energy-chart">
-          <div class="chart-bar">
-            <div class="bar"><div class="bar-fill" style="height: 45%;"></div></div>
-            <div class="bar-label">Heating</div>
-          </div>
-          <div class="chart-bar">
-            <div class="bar"><div class="bar-fill" style="height: 28%;"></div></div>
-            <div class="bar-label">Cooling</div>
-          </div>
-          <div class="chart-bar">
-            <div class="bar"><div class="bar-fill" style="height: 75%;"></div></div>
-            <div class="bar-label">DHW</div>
-          </div>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <img src="assets/hero-drafting.png" alt="" class="hero-bg-img" aria-hidden="true">
+
+        <div class="hero-content">
+            <span class="hero-label">BLDGTYP · PASSIVE HOUSE DESIGN & CONSULTING</span>
+            <h1 class="hero-title">Your Passive House questions.<br>Answered.</h1>
+            <p class="hero-subtitle">Passive House design and consulting for architects, developers, and builders. We model the answers so you can build with confidence.</p>
+            <button class="hero-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start a Project →</button>
         </div>
+    </section>
 
-        <table class="report-table">
-          <tr>
-            <td>Heating</td>
-            <td>15 kWh/m²a</td>
-          </tr>
-          <tr>
-            <td>Cooling</td>
-            <td>8 kWh/m²a</td>
-          </tr>
-          <tr>
-            <td>Peak Load</td>
-            <td>25 W/m²</td>
-          </tr>
-        </table>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-inner">
+            <span class="section-label">WHAT WE DO</span>
 
-        <div class="report-image">
-          <img src="assets/detail-foundation.png" alt="Building assembly detail">
+            <div class="services-grid">
+                <!-- Service Card 1: Energy Modeling -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Building outline -->
+                            <rect x="30" y="20" width="60" height="70" stroke="var(--accent)" stroke-width="2" fill="none"/>
+
+                            <!-- Windows -->
+                            <rect x="40" y="30" width="12" height="12" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+                            <rect x="64" y="30" width="12" height="12" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+                            <rect x="40" y="50" width="12" height="12" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+                            <rect x="64" y="50" width="12" height="12" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+
+                            <!-- Energy flow arrows -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <polygon points="0 0, 10 3, 0 6" fill="var(--accent)"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Arrows pointing outward (energy loss) -->
+                            <line x1="90" y1="40" x2="110" y2="40" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.7"/>
+                            <line x1="90" y1="60" x2="110" y2="60" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.7"/>
+                            <line x1="60" y1="90" x2="60" y2="110" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.7"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">ENERGY MODELING</h3>
+                    <h4 class="service-subtitle">Know before you build</h4>
+                    <p class="service-desc">We model your building's energy performance so you can make design decisions with real data — not assumptions. From envelope to mechanicals, every system is accounted for.</p>
+                </div>
+
+                <!-- Service Card 2: Thermal Bridges -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Wall assembly cross-section -->
+                            <rect x="20" y="30" width="12" height="60" stroke="var(--accent)" stroke-width="1" fill="none"/>
+                            <rect x="32" y="30" width="18" height="60" stroke="var(--accent)" stroke-width="1" fill="none"/>
+                            <rect x="50" y="30" width="8" height="60" stroke="var(--accent)" stroke-width="1" fill="none"/>
+                            <rect x="58" y="30" width="12" height="60" stroke="var(--accent)" stroke-width="1" fill="none"/>
+
+                            <!-- Thermal bridge detail -->
+                            <circle cx="65" cy="60" r="8" fill="none" stroke="var(--highlight)" stroke-width="1.5"/>
+
+                            <!-- Heat flow lines -->
+                            <path d="M 65 50 Q 70 55 65 60 Q 70 65 65 70" stroke="var(--highlight)" stroke-width="1.5" fill="none" opacity="0.8"/>
+                            <path d="M 75 55 L 95 55" stroke="var(--highlight)" stroke-width="1.5" opacity="0.7"/>
+                            <path d="M 75 60 L 95 60" stroke="var(--highlight)" stroke-width="1.5" opacity="0.7"/>
+                            <path d="M 75 65 L 95 65" stroke="var(--highlight)" stroke-width="1.5" opacity="0.7"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">THERMAL BRIDGES</h3>
+                    <h4 class="service-subtitle">Find the hidden losses</h4>
+                    <p class="service-desc">3D finite-element thermal bridge modeling identifies where your envelope is bleeding performance — before construction begins. Every junction, every connection, quantified.</p>
+                </div>
+
+                <!-- Service Card 3: Certification -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Checkmark badge -->
+                            <circle cx="60" cy="50" r="25" stroke="var(--accent)" stroke-width="2" fill="none"/>
+                            <path d="M 48 50 L 56 58 L 72 42" stroke="var(--accent)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Building outline below -->
+                            <rect x="35" y="75" width="50" height="35" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+                            <line x1="45" y1="75" x2="45" y2="110" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+                            <line x1="60" y1="75" x2="60" y2="110" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+                            <line x1="75" y1="75" x2="75" y2="110" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">CERTIFICATION</h3>
+                    <h4 class="service-subtitle">Cross the finish line</h4>
+                    <p class="service-desc">PHIUS and PHI certification support from schematic design through final verification. We handle the modeling, the documentation, and the review process.</p>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Content -->
-      <div class="deliverable-content fade-in">
-        <h3>A complete picture of your building's performance</h3>
-        <ul class="deliverable-list">
-          <li>Annual energy demand calculations</li>
-          <li>Peak heating and cooling loads</li>
-          <li>Thermal bridge analysis (Psi-values)</li>
-          <li>Air tightness recommendations</li>
-          <li>Certification pathway guidance</li>
-          <li>Construction detail specifications</li>
-        </ul>
-        <p class="deliverable-closing">CLEAR ENOUGH FOR YOUR CLIENT.<br>DETAILED ENOUGH FOR YOUR ENGINEER.</p>
-      </div>
-    </div>
-  </section>
+    <!-- Who We Work With Section -->
+    <section class="who-section" id="who">
+        <div class="who-inner">
+            <span class="section-label">WHO WE WORK WITH</span>
 
-  <!-- Open Source Strip -->
-  <section class="open-source">
-    <div class="open-source-content">
-      <div class="open-source-label">OPEN SOURCE</div>
-      <div class="open-source-divider"></div>
-      <div class="open-source-text">
-        Tools and data from <a href="https://www.passivehousetools.com/" target="_blank" rel="noopener noreferrer">Passive House Tools</a>
-      </div>
-    </div>
-  </section>
+            <div class="who-grid">
+                <!-- Architects Column -->
+                <div class="who-column">
+                    <div class="who-icon">
+                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Simple house cross-section -->
+                            <!-- Foundation -->
+                            <line x1="20" y1="90" x2="100" y2="90" stroke="var(--accent)" stroke-width="1.5"/>
 
-  <!-- Stats Section -->
-  <section class="stats" id="stats">
-    <div class="section-label" style="color: var(--accent); margin-bottom: 60px;">WHY PASSIVE HOUSE</div>
-    <div class="stats-grid">
-      <div class="stat-item fade-in">
-        <div class="stat-number">65,000+</div>
-        <div class="stat-label">Certified units in North America</div>
-      </div>
-      <div class="stat-item fade-in">
-        <div class="stat-number">Up to 90%</div>
-        <div class="stat-label">Reduction in heating & cooling energy</div>
-      </div>
-      <div class="stat-item fade-in">
-        <div class="stat-number">60+</div>
-        <div class="stat-label">Years of proven building science</div>
-      </div>
-      <div class="stat-item fade-in">
-        <div class="stat-number">#1</div>
-        <div class="stat-label">Fastest-growing standard in the US</div>
-      </div>
-    </div>
-  </section>
+                            <!-- Walls -->
+                            <line x1="35" y1="90" x2="35" y2="50" stroke="var(--accent)" stroke-width="1.5"/>
+                            <line x1="85" y1="90" x2="85" y2="50" stroke="var(--accent)" stroke-width="1.5"/>
 
-  <!-- Contact CTA Section -->
-  <section class="contact-cta" id="contact">
-    <h2>Ready to model your next project?</h2>
-    <p>Let's talk about your building's performance.</p>
-    <button class="btn" id="cta-secondary">Start a Project →</button>
-    <div class="contact-email">
-      or email us at <a href="mailto:info@bldgtyp.com">info@bldgtyp.com</a>
-    </div>
-  </section>
+                            <!-- Roof -->
+                            <line x1="35" y1="50" x2="60" y2="25" stroke="var(--accent)" stroke-width="1.5"/>
+                            <line x1="85" y1="50" x2="60" y2="25" stroke="var(--accent)" stroke-width="1.5"/>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      Brooklyn, NY · <a href="mailto:info@bldgtyp.com">info@bldgtyp.com</a> · © 2026 Building-Type LLC
-    </div>
-  </footer>
+                            <!-- Interior wall -->
+                            <line x1="60" y1="90" x2="60" y2="50" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
 
-  <script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const navToggle = document.getElementById('nav-toggle');
-    const navCenter = document.getElementById('nav-center');
-    const brand = document.getElementById('brand');
-    const nav = document.getElementById('nav');
+                            <!-- Windows -->
+                            <rect x="42" y="65" width="8" height="8" stroke="var(--accent)" stroke-width="1" fill="none"/>
+                            <rect x="70" y="65" width="8" height="8" stroke="var(--accent)" stroke-width="1" fill="none"/>
 
-    // Initialize theme from localStorage
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    htmlElement.setAttribute('data-theme', savedTheme);
-    updateThemeToggleButton(savedTheme);
+                            <!-- Door -->
+                            <rect x="56" y="70" width="8" height="20" stroke="var(--accent)" stroke-width="1" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3 class="who-title">ARCHITECTS</h3>
+                    <p class="who-subtitle">Designing high-performance luxury homes</p>
+                    <p class="who-body">You care about craft, comfort, and precision. We bring the energy science to match your design ambition — without compromising your architecture.</p>
+                    <p class="who-detail">Single-family · Townhouse · Brownstone renovation</p>
+                </div>
 
-    function updateThemeToggleButton(theme) {
-      themeToggle.textContent = theme === 'light' ? '☽' : '☀';
-    }
+                <!-- Developers Column -->
+                <div class="who-column">
+                    <div class="who-icon">
+                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Multi-story building cross-section -->
+                            <!-- Foundation -->
+                            <line x1="25" y1="100" x2="95" y2="100" stroke="var(--accent)" stroke-width="1.5"/>
 
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      htmlElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeToggleButton(newTheme);
-    });
+                            <!-- Outer walls -->
+                            <line x1="30" y1="100" x2="30" y2="20" stroke="var(--accent)" stroke-width="1.5"/>
+                            <line x1="90" y1="100" x2="90" y2="20" stroke="var(--accent)" stroke-width="1.5"/>
 
-    // Mobile menu toggle
-    navToggle.addEventListener('click', () => {
-      navCenter.classList.toggle('active');
-    });
+                            <!-- Roof -->
+                            <line x1="30" y1="20" x2="60" y2="10" stroke="var(--accent)" stroke-width="1.5"/>
+                            <line x1="90" y1="20" x2="60" y2="10" stroke="var(--accent)" stroke-width="1.5"/>
 
-    // Close mobile menu when clicking nav links
-    const navLinks = navCenter.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navCenter.classList.remove('active');
-      });
-    });
+                            <!-- Floor levels -->
+                            <line x1="30" y1="38" x2="90" y2="38" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+                            <line x1="30" y1="56" x2="90" y2="56" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+                            <line x1="30" y1="74" x2="90" y2="74" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
 
-    // Nav scroll detection
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
+                            <!-- Windows per floor -->
+                            <rect x="40" y="28" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                            <rect x="70" y="28" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                            <rect x="40" y="46" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                            <rect x="70" y="46" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                            <rect x="40" y="64" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                            <rect x="70" y="64" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                            <rect x="40" y="82" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                            <rect x="70" y="82" width="6" height="6" stroke="var(--accent)" stroke-width="0.8" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3 class="who-title">DEVELOPERS</h3>
+                    <p class="who-subtitle">Building affordable multifamily at scale</p>
+                    <p class="who-body">You need certification, incentives, and energy performance that pencils out. We model efficiently and deliver documentation your review team will accept.</p>
+                    <p class="who-detail">Affordable housing · Mixed-use · Multifamily</p>
+                </div>
 
-    // Brand click to scroll to top
-    brand.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+                <!-- Builders Column -->
+                <div class="who-column">
+                    <div class="who-icon">
+                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <!-- House under construction -->
+                            <!-- Foundation -->
+                            <line x1="20" y1="95" x2="100" y2="95" stroke="var(--accent)" stroke-width="2"/>
 
-    // Fade-in on scroll using IntersectionObserver
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+                            <!-- Framing studs -->
+                            <line x1="30" y1="95" x2="30" y2="45" stroke="var(--accent)" stroke-width="1.5"/>
+                            <line x1="50" y1="95" x2="50" y2="45" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+                            <line x1="70" y1="95" x2="70" y2="45" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+                            <line x1="90" y1="95" x2="90" y2="45" stroke="var(--accent)" stroke-width="1.5"/>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-          observer.unobserve(entry.target);
+                            <!-- Top plate -->
+                            <line x1="28" y1="45" x2="92" y2="45" stroke="var(--accent)" stroke-width="1.5"/>
+
+                            <!-- Roof rafters -->
+                            <line x1="28" y1="45" x2="60" y2="20" stroke="var(--accent)" stroke-width="1.5"/>
+                            <line x1="92" y1="45" x2="60" y2="20" stroke="var(--accent)" stroke-width="1.5"/>
+                            <line x1="44" y1="45" x2="60" y2="28" stroke="var(--accent)" stroke-width="0.8" opacity="0.5"/>
+                            <line x1="76" y1="45" x2="60" y2="28" stroke="var(--accent)" stroke-width="0.8" opacity="0.5"/>
+
+                            <!-- Insulation indication between studs -->
+                            <path d="M 33 60 Q 38 55 41 60 Q 44 65 47 60" stroke="var(--accent)" stroke-width="0.8" fill="none" opacity="0.4"/>
+                            <path d="M 33 75 Q 38 70 41 75 Q 44 80 47 75" stroke="var(--accent)" stroke-width="0.8" fill="none" opacity="0.4"/>
+                            <path d="M 53 60 Q 58 55 61 60 Q 64 65 67 60" stroke="var(--accent)" stroke-width="0.8" fill="none" opacity="0.4"/>
+                            <path d="M 53 75 Q 58 70 61 75 Q 64 80 67 75" stroke="var(--accent)" stroke-width="0.8" fill="none" opacity="0.4"/>
+
+                            <!-- Dimension arrow -->
+                            <line x1="30" y1="105" x2="90" y2="105" stroke="var(--highlight)" stroke-width="1"/>
+                            <line x1="30" y1="103" x2="30" y2="107" stroke="var(--highlight)" stroke-width="1"/>
+                            <line x1="90" y1="103" x2="90" y2="107" stroke="var(--highlight)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <h3 class="who-title">BUILDERS</h3>
+                    <p class="who-subtitle">Getting high-performance details right</p>
+                    <p class="who-body">You're building it — and you need to know the assemblies will perform. Our standard assessment gives you clear, actionable guidance on envelope details, airtightness, and mechanical sizing.</p>
+                    <p class="who-detail">Single-family homes · Custom builds · Renovations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="process-inner">
+            <span class="section-label">HOW IT WORKS</span>
+
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">SHARE YOUR PLANS</div>
+                    <p class="step-desc">Send us your drawings at any stage — from early sketches to full CDs. The earlier we're involved, the more impact we can have.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">WE BUILD YOUR MODEL</div>
+                    <p class="step-desc">We create a detailed energy model of your building — every wall assembly, every window, every mechanical system — in WUFI Passive or PHPP.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">REVIEW TOGETHER</div>
+                    <p class="step-desc">We walk through the results with your team. Where is performance falling short? What are the most cost-effective upgrades? Real numbers, real options.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">YOUR REPORT</div>
+                    <p class="step-desc">You receive a comprehensive design-phase report — a complete snapshot of your building's energy performance, with clear recommendations.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">BUILD WITH CONFIDENCE</div>
+                    <p class="step-desc">Construction proceeds with a fully documented performance target. We support you through certification and final verification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverable Section -->
+    <section class="deliverable" id="deliverable">
+        <div class="deliverable-inner">
+            <span class="section-label">YOUR DELIVERABLE</span>
+
+            <div class="deliverable-grid">
+                <!-- Report Mockup -->
+                <div class="report-mockup">
+                    <div class="report-header">
+                        <div>
+                            <div class="report-title">BLDGTYP · ENERGY REPORT</div>
+                            <div class="report-project">PROJECT INFO</div>
+                        </div>
+                    </div>
+
+                    <div class="report-chart">
+                        <div class="report-bar"></div>
+                        <div class="report-bar"></div>
+                        <div class="report-bar"></div>
+                        <div class="report-bar"></div>
+                    </div>
+
+                    <div class="report-table">
+                        <div class="report-table-row">
+                            <div class="report-table-label">Heating</div>
+                            <div class="report-table-value">15 kWh/m²a</div>
+                        </div>
+                        <div class="report-table-row">
+                            <div class="report-table-label">Cooling</div>
+                            <div class="report-table-value">8 kWh/m²a</div>
+                        </div>
+                        <div class="report-table-row">
+                            <div class="report-table-label">Peak Load</div>
+                            <div class="report-table-value">25 W/m²</div>
+                        </div>
+                    </div>
+
+                    <div class="report-assembly">
+                        <img src="assets/detail-foundation.png" alt="Foundation detail drawing">
+                        <span class="report-assembly-label">Assembly Detail · Foundation</span>
+                    </div>
+                </div>
+
+                <!-- Deliverable Content -->
+                <div class="deliverable-content">
+                    <h3>A complete picture of your building's performance</h3>
+                    <p class="deliverable-intro">Every project receives a detailed design-phase report covering:</p>
+
+                    <ul class="deliverable-list">
+                        <li>Annual heating and cooling demand</li>
+                        <li>Peak load calculations</li>
+                        <li>Envelope performance by assembly</li>
+                        <li>Thermal bridge impact analysis</li>
+                        <li>Mechanical system recommendations</li>
+                        <li>Certification pathway and compliance status</li>
+                    </ul>
+
+                    <p class="deliverable-closing">CLEAR ENOUGH FOR YOUR CLIENT.<br>DETAILED ENOUGH FOR YOUR ENGINEER.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Source Credibility Strip -->
+    <section class="oss-strip">
+        <div class="oss-inner">
+            <span class="oss-label">OPEN SOURCE</span>
+            <div class="oss-divider"></div>
+            <p class="oss-text">We build and maintain <a href="https://www.passivehousetools.com/" target="_blank">Passive House Tools</a> — the open-source toolkit used by Passive House practitioners worldwide. The same rigor we put into our software goes into every project we model.</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="stats-inner">
+            <span class="stats-label">WHY PASSIVE HOUSE</span>
+
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">65,000+</div>
+                    <div class="stat-label">Certified units in North America</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">Up to 90%</div>
+                    <div class="stat-label">Reduction in heating & cooling energy</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">60+</div>
+                    <div class="stat-label">Years of proven building science</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">#1</div>
+                    <div class="stat-label">Fastest-growing standard in the US</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta" id="contact">
+        <div class="final-cta-inner">
+            <h2>Ready to model your next project?</h2>
+            <p class="final-cta-subtitle">We work with architects, developers, and builders building to the highest standard. Reach out to start the conversation.</p>
+            <button class="final-cta-button" onclick="handleCTA()">Start a Project →</button>
+            <p class="final-cta-email">or email us at <a href="mailto:info@bldgtyp.com">info@bldgtyp.com</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Brooklyn, NY · <a href="mailto:info@bldgtyp.com">info@bldgtyp.com</a> · © 2026 Building-Type LLC</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+
+            // Update icon
+            const icon = document.getElementById('theme-icon');
+            icon.textContent = newTheme === 'dark' ? '☀' : '☽';
+
+            // Persist preference
+            localStorage.setItem('theme', newTheme);
         }
-      });
-    }, observerOptions);
 
-    // Observe all fade-in elements
-    document.querySelectorAll('.fade-in').forEach(el => {
-      observer.observe(el);
-    });
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const icon = document.getElementById('theme-icon');
+            icon.textContent = savedTheme === 'dark' ? '☀' : '☽';
+        });
 
-    // CTA Button Actions
-    const ctaPrimary = document.getElementById('cta-primary');
-    const ctaSecondary = document.getElementById('cta-secondary');
+        // Nav scroll detection
+        const nav = document.getElementById('nav');
+        let lastScrollY = 0;
 
-    ctaPrimary.addEventListener('click', () => {
-      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    });
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
 
-    ctaSecondary.addEventListener('click', () => {
-      window.location.href = 'mailto:info@bldgtyp.com?subject=Project%20Inquiry';
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && document.querySelector(href)) {
-          e.preventDefault();
-          document.querySelector(href).scrollIntoView({
-            behavior: 'smooth'
-          });
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      });
-    });
-  </script>
+
+        // CTA handler
+        function handleCTA() {
+            window.scrollTo({
+                top: document.getElementById('contact').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
